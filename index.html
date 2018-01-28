@@ -8,43 +8,44 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/jquery@3.2.1/dist/jquery.min.js"></script>
     <style>
-     * {
-         margin: 0;
-         padding: 0;
-         border: 0;
-         font-size: 100%;
-         font: inherit;
-         vertical-align: baseline;
-     }
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
 
-     body {
-         line-height: 1;
-         background-color: #333;
-         color: #fff;
-     }
+        body {
+            line-height: 1;
+            background-color: #333;
+            color: #fff;
+        }
 
-     #full {
-         min-height: 100vh;
-         -webkit-box-align: center;
-         -ms-flex-align: center;
-         align-items: center;
-         display: -webkit-box;
-         display: -ms-flexbox;
-         display: flex;
-         -webkit-box-pack: justify;
-         -ms-flex-pack: justify;
-         justify-content: center;
-     }
+        #full {
+            min-height: 100vh;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: center;
+        }
 
-     #root {
-         -webkit-box-flex: 1;
-         -ms-flex-positive: 1;
-         flex-grow: 1;
-         -ms-flex-negative: 1;
-         flex-shrink: 1;
-         text-align: center;
-     }
+        #root {
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            -ms-flex-negative: 1;
+            flex-shrink: 1;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -65,6 +66,7 @@
 
          getFortune() {
              axios.get('https://happyukgo.com/api/fortune/').then(res => this.setState({ fortune: res.data }));
+             axios.get('http://cors.io/?u=https://helloacm.com/api/cowsay?msg=CowSay').then(res => console.log(res.data));
          }
 
          generateCowSay() {
