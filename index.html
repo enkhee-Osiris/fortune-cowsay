@@ -3,22 +3,94 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Hello World</title>
+    <title>Fortune + Cowsay</title>
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+     * {
+         margin: 0;
+         padding: 0;
+         border: 0;
+         font-size: 100%;
+         font: inherit;
+         vertical-align: baseline;
+     }
+
+     body {
+         line-height: 1;
+         background-color: #333;
+         color: #fff;
+     }
+
+     #full {
+         min-height: 100vh;
+         -webkit-box-align: center;
+         -ms-flex-align: center;
+         align-items: center;
+         display: -webkit-box;
+         display: -ms-flexbox;
+         display: flex;
+         -webkit-box-pack: justify;
+         -ms-flex-pack: justify;
+         justify-content: center;
+     }
+
+     #root {
+         -webkit-box-flex: 1;
+         -ms-flex-positive: 1;
+         flex-grow: 1;
+         -ms-flex-negative: 1;
+         flex-shrink: 1;
+         text-align: center;
+     }
+    </style>
 </head>
 
 <body>
-    <div id="root"></div>
+    <section id="full">
+        <div id="root"></div>
+    </section>
     <script type="text/babel">
+     class Cowsay extends React.Component {
+         constructor(props) {
+             super(props);
+             this.state = {
+                 loading: true,
+                 fortune: '',
+                 cowsay: ''
+             };
+         }
 
+         getFortune() {
+             axios.get('https://happyukgo.com/api/fortune/').then(res => this.setState({ fortune: res.data }));
+         }
 
-        ReactDOM.render(
-            <h1>Hello, world!</h1>,
-            document.getElementById('root')
-        );
+         generateCowSay() {
+             axios.get(`https://helloacm.com/api/cowsay?msg=${encodeURIComponent(this.state.fortune)}/`).then(res => {
+                 console.log(res.data);
+                 this.setState({ cowsay: res.data });
+             });
+         }
 
+         componentDidMount() {
+             this.getFortune();
+         }
+
+         componentDidUpdate() {
+             this.generateCowSay();
+         }
+
+         render() {
+             return (
+                 <div>
+                     Hello: { this.state.fortune }
+                 </div>
+             )
+         }
+     }
+     ReactDOM.render(<Cowsay />, document.getElementById('root'));
     </script>
 </body>
 
