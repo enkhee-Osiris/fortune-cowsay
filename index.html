@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>Fortune + Cowsay</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/jquery@3.2.1/dist/jquery.min.js"></script>
     <style>
      * {
          margin: 0;
@@ -23,6 +23,7 @@
          line-height: 1;
          background-color: #333;
          color: #fff;
+         font-family: 'Source Code Pro', monospace;
      }
 
      #full {
@@ -44,7 +45,7 @@
          flex-grow: 1;
          -ms-flex-negative: 1;
          flex-shrink: 1;
-         text-align: center;
+         max-width: 480px;
      }
     </style>
 </head>
@@ -65,14 +66,12 @@
          }
 
          getFortune() {
-             axios.get('https://happyukgo.com/api/fortune/').then(res => this.setState({ fortune: res.data }));
-             axios.get('https://cors.io/?http://cowsay.morecode.org/say?message=HelloWorld&format=json').then(res => console.log(res.data));
+             axios.get('https://happyukgo.com/api/fortune/').then(res => this.setState({ fortune: res.data }, () => { this.generateCowSay() }));
          }
 
          generateCowSay() {
-             axios.get(`https://helloacm.com/api/cowsay?msg=${encodeURIComponent(this.state.fortune)}/`).then(res => {
-                 console.log(res.data);
-                 this.setState({ cowsay: res.data });
+             axios.get(`https://cors.io/?http://cowsay.morecode.org/say?message=${encodeURIComponent(this.state.fortune)}&format=json`).then(res => {
+                 this.setState({ cowsay: res.data.cow });
              });
          }
 
@@ -80,15 +79,11 @@
              this.getFortune();
          }
 
-         componentDidUpdate() {
-             this.generateCowSay();
-         }
-
          render() {
              return (
-                 <div>
-                     Hello: { this.state.fortune }
-                 </div>
+                 <pre>
+                     { this.state.cowsay }
+                 </pre>
              )
          }
      }
