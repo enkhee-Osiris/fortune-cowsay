@@ -46,13 +46,13 @@
     }
     /* Timer*/
     .timer {
-      width: 24px;
-      height: 24px;
+      width: 40px;
+      height: 40px;
       background-color: transparent;
       box-shadow: inset 0px 0px 0px 2px #fff;
       border-radius: 50%;
       position: relative;
-      margin: 38px auto;/* Not necessary- its only for layouting*/
+      margin: 0 auto;
     }
     .timer:after, .timer:before{
       position: absolute;
@@ -60,10 +60,10 @@
       background-color: #fff;
     }
     .timer:after {
-      width: 10px;
+      width: 16px;
       height: 2px;
-      top: 11px;
-      left: 11px;
+      top: 18px;
+      left: 18px;
       -webkit-transform-origin: 1px 1px;
       -moz-transform-origin: 1px 1px;
       transform-origin: 1px 1px;
@@ -72,10 +72,10 @@
       animation: minhand 2s linear infinite;
     }
     .timer:before {
-      width: 8px;
+      width: 14px;
       height: 2px;
-      top: 11px;
-      left: 11px;
+      top: 18px;
+      left: 18px;
       -webkit-transform-origin: 1px 1px;
       -moz-transform-origin: 1px 1px;
       transform-origin: 1px 1px;
@@ -160,19 +160,17 @@
           const phaseJump = 360 / len;
           let spans;
 
-          cow.innerHTML = text.map(function (char) {
-            return '<span>' + char + '</span>';
-          }).join('');
-
+          cow.innerHTML = text.map(c => `<span>${c}</span>`).join('');
           spans = cow.children;
 
-          (function wheee () {
+          const wheee = () => {
             for (var i = 0; i < len; i++) {
-              spans[i].style.color = 'hsl(' + (angle + Math.floor(i * phaseJump)) + ', 55%, 70%)';
+              spans[i].style.color = `hsl(${(angle + Math.floor(i * phaseJump))}, 55%, 70%)`;
             }
             angle++;
             requestAnimationFrame(wheee);
-          })();
+          }
+          (wheee)();
         }
       }
 
@@ -193,30 +191,6 @@
       }
     }
     ReactDOM.render(<Cowsay />, document.getElementById('root'));
-  </script>
-  <script>
-    (function () {
-      var angle = 0;
-      var p = document.querySelector('pre');
-      var text = p.textContent.split('');
-      var len = text.length;
-      var phaseJump = 360 / len;
-      var spans;
-
-      p.innerHTML = text.map(function (char) {
-        return '<span>' + char + '</span>';
-      }).join('');
-
-      spans = p.children;
-
-      (function wheee () {
-        for (var i = 0; i < len; i++) {
-          spans[i].style.color = 'hsl(' + (angle + Math.floor(i * phaseJump)) + ', 55%, 70%)';
-        }
-        angle++;
-        requestAnimationFrame(wheee);
-      })();
-    })();
   </script>
 </body>
 
