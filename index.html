@@ -109,13 +109,25 @@
         0%{transform:rotate(0deg)}
         100%{transform:rotate(360deg)}
     }
-
+    footer {
+      width: 100%;
+      position: absolute;
+      bottom: 20px;
+      color: #fff;
+    }
+    footer > p a {
+      color: #fa1414;
+      text-decoration: none;
+    }
   </style>
 </head>
 
 <body>
   <section id="full">
     <div id="root"></div>
+    <footer>
+      <p align="center">Crafted with <span style="color: #fa1414">♥</span> by <a href="http://github.com/enkhee-Osiris">Osiris</a>.</p>
+    </footer>
   </section>
   <script type="text/babel">
     class Cowsay extends React.Component {
