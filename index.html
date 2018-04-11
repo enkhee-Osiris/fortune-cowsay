@@ -150,9 +150,9 @@
       }
 
       generateCowSay() {
-        axios.get(`https://cors.io/?http://cowsay.morecode.org/say?message=${encodeURIComponent(this.state.fortune)}&format=json`).then(res => {
+        axios.get(`https://helloacm.com/api/cowsay/?msg=${encodeURIComponent(this.state.fortune)}`).then(res => {
           this.setState({
-            cowsay: res.data.cow,
+            cowsay: res.data,
             loading: false
           });
         });
