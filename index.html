@@ -141,7 +141,7 @@
       }
 
       getFortune() {
-        axios.get('https://happyukgo.com/api/fortune/').then(res =>
+        axios.get('https://uploadbeta.com/api/fortune/').then(res =>
           this.setState({
             fortune: res.data
           }, () => {
@@ -150,7 +150,7 @@
       }
 
       generateCowSay() {
-        axios.get(`https://helloacm.com/api/cowsay/?msg=${encodeURIComponent(this.state.fortune)}`).then(res => {
+        axios.get(`https://uploadbeta.com/api/cowsay/?msg=${encodeURIComponent(this.state.fortune)}`).then(res => {
           this.setState({
             cowsay: res.data,
             loading: false
